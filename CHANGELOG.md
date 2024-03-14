@@ -1,4 +1,10 @@
 
+v0.2.0 / 2024-03-14
+==================
+
+  * feat(hash): init key-value array library
+  * chore: remove todo for item_t tests
+
 v0.1.1 / 2024-03-14
 ==================
 
