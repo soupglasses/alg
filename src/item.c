@@ -24,11 +24,11 @@ int item_equal(item_t left, item_t right) {
   return 0;
 }
 
-void item_free(item_t elem) {
-  switch (elem.type) {
+void item_free(item_t item) {
+  switch (item.type) {
     case 's':
-      free(elem.data.s);
+      free(item.data.s);
     case 'p':
-      free(elem.data.p);
+      free(item.data.p);
   };
 }

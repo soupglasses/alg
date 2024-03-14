@@ -17,6 +17,6 @@ typedef struct Item {
 } item_t;
 
 int item_equal(item_t left, item_t right);
-void item_free(item_t elem);
+void item_free(item_t item);
 
 #endif //SW2ALG_ITEM_H_

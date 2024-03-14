@@ -11,9 +11,6 @@ typedef struct Node {
   struct Node* next;
 } node_t;
 
-int item_equal(item_t left, item_t right);
-void item_free(item_t elem);
-
 node_t* list_new(void);
 
 void list_free(node_t* const sentinel);
@@ -21,14 +18,14 @@ void list_free(node_t* const sentinel);
 int list_elem_is_sentinel(node_t* elem);
 int list_empty(node_t* const sentinel);
 
-node_t* list_elem_insert(node_t* left_elem, item_t elem);
-node_t* list_prepend(node_t* const sentinel, item_t elem);
-node_t* list_append(node_t* const sentinel, item_t elem);
+node_t* list_elem_insert(node_t* left_elem, item_t item);
+node_t* list_prepend(node_t* const sentinel, item_t item);
+node_t* list_append(node_t* const sentinel, item_t item);
 
 item_t list_elem_remove(node_t* elem);
 
 node_t* list_at(node_t* const sentinel, int pos);
-node_t* list_find(node_t* const sentinel, item_t elem);
+node_t* list_find(node_t* const sentinel, item_t item);
 int list_length(node_t* const sentinel);
 
 #endif //SW2ALG_LIST_H_

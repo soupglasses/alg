@@ -51,12 +51,12 @@ int list_empty(node_t* const sentinel) {
 // Insert to the right of the list element given.
 // Returns the new list element which holds the new item.
 // Could return NULL if Malloc fails.
-node_t* list_elem_insert(node_t* left_elem, item_t elem) {
+node_t* list_elem_insert(node_t* left_elem, item_t item) {
   node_t* current_elem = calloc(1, sizeof(node_t));
   if (current_elem == NULL) return NULL;
   node_t* right_elem = left_elem->next;
 
-  current_elem->item = elem;
+  current_elem->item = item;
 
   current_elem->prev = left_elem;
   current_elem->next = right_elem;
@@ -68,15 +68,15 @@ node_t* list_elem_insert(node_t* left_elem, item_t elem) {
 }
 
 // Adds an element at the start of the list.
-node_t* list_prepend(node_t* const sentinel, item_t elem) {
+node_t* list_prepend(node_t* const sentinel, item_t item) {
   // Recasting sentinel as its contract does not require the sentinel
   // as its argument (which is what const tries to convey).
-  return list_elem_insert((node_t*) sentinel, elem);
+  return list_elem_insert((node_t*) sentinel, item);
 }
 
 // Adds an element at the end of the list.
-node_t* list_append(node_t* const sentinel, item_t elem) {
-  return list_elem_insert(sentinel->prev, elem);
+node_t* list_append(node_t* const sentinel, item_t item) {
+  return list_elem_insert(sentinel->prev, item);
 }
 
 // Caller must handle deallocating possible pointers inside returned item_t.
@@ -119,10 +119,10 @@ node_t* list_at(node_t* const sentinel, int pos) {
   return current;
 }
 
-node_t* list_find(node_t* const sentinel, item_t elem) {
+node_t* list_find(node_t* const sentinel, item_t item) {
   node_t* current = sentinel->next;
   while (current != sentinel) {
-    if (item_equal(current->item, elem)) return current;
+    if (item_equal(current->item, item)) return current;
     current = current->next;
   }
   // We didn't find anything.
