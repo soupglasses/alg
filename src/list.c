@@ -52,19 +52,19 @@ int list_empty(node_t* const sentinel) {
 // Returns the new list element which holds the new item.
 // Could return NULL if Malloc fails.
 node_t* list_elem_insert(node_t* left_elem, item_t item) {
-  node_t* current_elem = calloc(1, sizeof(node_t));
-  if (current_elem == NULL) return NULL;
+  node_t* middle_elem = calloc(1, sizeof(node_t));
+  if (middle_elem == NULL) return NULL;
   node_t* right_elem = left_elem->next;
 
-  current_elem->item = item;
+  middle_elem->item = item;
 
-  current_elem->prev = left_elem;
-  current_elem->next = right_elem;
+  middle_elem->prev = left_elem;
+  middle_elem->next = right_elem;
 
-  left_elem->next = current_elem;
-  right_elem->prev = current_elem;
+  left_elem->next = middle_elem;
+  right_elem->prev = middle_elem;
 
-  return current_elem;
+  return middle_elem;
 }
 
 // Adds an element at the start of the list.
