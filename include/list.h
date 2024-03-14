@@ -1,8 +1,7 @@
 // Copyright © 2024 soupglasses <sofi+git@mailbox.org>
 // SPDX-License-Identifier: EUPL-1.2
-
-#ifndef SW2ALG_LIST_H
-#define SW2ALG_LIST_H
+#ifndef SW2ALG_LIST_H_
+#define SW2ALG_LIST_H_
 
 #define ITEM_NULL (item_t) { .type = 'p', .data.p = NULL }
 
@@ -43,4 +42,4 @@ node_t* list_at(node_t* const sentinel, int pos);
 node_t* list_find(node_t* const sentinel, item_t elem);
 int list_length(node_t* const sentinel);
 
-#endif //SW2ALG_LIST_H
+#endif //SW2ALG_LIST_H_
