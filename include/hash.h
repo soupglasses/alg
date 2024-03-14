@@ -22,4 +22,4 @@ void* hash_remove(hash_t* hash_table, const char* key);
 
 int hash_count(hash_t* hash_table);
 
-#endif //SW2AØG_HASH_H_
+#endif //SW2ALG_HASH_H_
