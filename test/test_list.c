@@ -1,6 +1,7 @@
 // Copyright © 2024 soupglasses <sofi+git@mailbox.org>
 // SPDX-License-Identifier: EUPL-1.2
 #include "mtest.h"
+#include "item.h"
 #include "list.h"
 
 TEST_CASE(create_and_free, {

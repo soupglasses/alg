@@ -3,18 +3,7 @@
 #ifndef SW2ALG_LIST_H_
 #define SW2ALG_LIST_H_
 
-#define ITEM_NULL (item_t) { .type = 'p', .data.p = NULL }
-
-typedef struct Item {
-  char type;
-  union {
-    int i;
-    double d;
-    char c;
-    char* s;
-    void* p;
-  } data;
-} item_t;
+#include "item.h"
 
 typedef struct Node {
   item_t item;
