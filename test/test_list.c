@@ -165,6 +165,4 @@ TEST_CASE(find, {
   list_free(list);
 })
 
-// TODO: Test all the item's.
-
 MAIN_RUN_TESTS(create_and_free, insert, prepend_append, delete, length, indexing, find)
