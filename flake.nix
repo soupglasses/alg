@@ -1,5 +1,8 @@
 # Copyright © 2024 soupglasses <sofi+git@mailbox.org>
-# SPDX-License-Identifier: EUPL-1.2
+#
+# Licensed under the EUPL, with extension of article 5 (compatibility
+# clause) to any licence for distributing derivative works that have
+# been produced by the normal use of the Work as a library.
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
