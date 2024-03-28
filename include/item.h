@@ -15,7 +15,8 @@ typedef struct Item {
     int i;
     double d;
     char c;
-    char* s;
+    char* s; // Dynamically allocated string.
+    char* S; // Statically allocated string.
     void* p;
   } data;
 } item_t;

@@ -10,17 +10,23 @@
 
 // A non zero return value means its equal.
 int item_equal(item_t left, item_t right) {
-  if (left.type != right.type) return 0;
   switch (left.type) {
     case 'i':
+      if (right.type != 'i') return 0;
       return (left.data.i == right.data.i);
     case 'd':
+      if (right.type != 'd') return 0;
       return (left.data.d == right.data.d);
     case 'c':
+      if (right.type != 'c') return 0;
       return (left.data.c == right.data.c);
     case 's':
+    case 'S':
+      if (right.type != 's' && right.type != 'S') return 0;
+      // Both `s` and `S` are defined as `char *`, so this is okay for lookup.
       return (strcmp(left.data.s, right.data.s) == 0);
     case 'p':
+      if (right.type != 'p') return 0;
       return (left.data.p == right.data.p);
   };
   // Since we use a char, its technically possible to not match above.
