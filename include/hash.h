@@ -18,6 +18,7 @@ unsigned long djb2_hash(const char* str);
 hash_t* hash_new(unsigned int size);
 void hash_free(hash_t* hash_table);
 
+int _hash_desired_index(const hash_t* hash_table, const char* key);
 int hash_index(const hash_t* hash_table, const char* key);
 
 void* hash_get(const hash_t* hash_table, const char* key);

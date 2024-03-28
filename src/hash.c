@@ -55,7 +55,7 @@ void hash_free(hash_t* hash_table) {
   free(hash_table);
 }
 
-int hash_index(const hash_t* hash_table, const char* key) {
+int _hash_desired_index(const hash_t* hash_table, const char* key) {
   unsigned long key_hash = djb2_hash(key);
   int i = key_hash % hash_table->size;
   // Avoid case of infinite looping when hash table is full and asking
@@ -66,8 +66,15 @@ int hash_index(const hash_t* hash_table, const char* key) {
     i = (i + 1) % hash_table->size;
     attempts -= 1;
   }
-  if (attempts == 0) return -1;
-  return i;
+  if (attempts == 0) return -1; // We are full. Sorry :(
+  return i; // This position is correct for this key (empty or exact hash)!
+}
+
+int hash_index(const hash_t* hash_table, const char* key) {
+  unsigned long key_hash = djb2_hash(key);
+  int i = _hash_desired_index(hash_table, key);
+  if (hash_table->keys[i] != key_hash) return -1; // Key does not exist. :(
+  return i; // Exact key exists here! :)
 }
 
 // Return a value found at position key.
@@ -79,8 +86,9 @@ void* hash_get(const hash_t* hash_table, const char* key) {
 
 // Set and return the value at position key.
 void* hash_put(hash_t* hash_table, const char* key, void* value) {
-  int i = hash_index(hash_table, key);
-  if (i == -1) return NULL;
+  unsigned long key_hash = djb2_hash(key);
+  int i = _hash_desired_index(hash_table, key);
+  if (i == -1) return NULL; // We are full, sorry :(
 
   hash_table->keys[i] = djb2_hash(key);
   hash_table->values[i] = value;
@@ -92,6 +100,21 @@ void* hash_put(hash_t* hash_table, const char* key, void* value) {
 void* hash_remove(hash_t* hash_table, const char* key) {
   int i = hash_index(hash_table, key);
   if (i == -1) return NULL;
+
+  int orig_i = i;
+  void* tmp = NULL;
+  // Linear probe to test if there exists further hashes after us which use the same key.
+  while (orig_i == hash_table->keys[i + 1] % hash_table->size) {
+    hash_table->keys[i] = hash_table->keys[i + 1];
+
+    // Shift our value forwards.
+    tmp = hash_table->values[i];
+    hash_table->values[i] = hash_table->values[i + 1];
+    hash_table->values[i + 1] = tmp;
+
+    i++;
+  }
+
   hash_table->keys[i] = 0;
   void* value = hash_table->values[i];
   hash_table->values[i] = NULL;
